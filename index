@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEARN37 - Cybersecurity Programme & AGM 2026</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        palette: {
+                            yellow: '#F5C006',
+                            lime: '#90B933',
+                            green: '#2FA460',
+                            teal: '#00877A',
+                            deepTeal: '#006877',
+                            slate: '#2F4858',
+                            darkBg: '#0F1A21',
+                            darkCard: 'rgba(47, 72, 88, 0.45)',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-glow': 'pulseGlow 3s infinite alternate',
+                        'float': 'float 5s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        pulseGlow: {
+                            '0%': { boxShadow: '0 0 15px rgba(245, 192, 6, 0.2)' },
+                            '100%': { boxShadow: '0 0 30px rgba(47, 164, 96, 0.5)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0B1318;
+            color: #F8FAFC;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .cyber-grid {
+            background-image: linear-gradient(to right, rgba(47, 164, 96, 0.06) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(0, 135, 122, 0.06) 1px, transparent 1px);
+            background-size: 36px 36px;
+        }
+
+        .glass-panel {
+            background: rgba(23, 37, 46, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(144, 185, 51, 0.2);
+        }
+
+        .glass-panel-interactive {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-panel-interactive:hover {
+            border-color: rgba(245, 192, 6, 0.6);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px -10px rgba(0, 135, 122, 0.35);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #F5C006 0%, #90B933 40%, #2FA460 70%, #00877A 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .btn-gradient {
+            background: linear-gradient(135deg, #F5C006 0%, #90B933 100%);
+            color: #0B1318;
+        }
+
+        .btn-gradient:hover {
+            background: linear-gradient(135deg, #90B933 0%, #2FA460 100%);
+            color: #FFFFFF;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B1318;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #006877;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2FA460;
+        }
+    </style>
+</head>
+<body class="relative antialiased selection:bg-palette-yellow selection:text-palette-darkBg">
+
+    <canvas id="particleCanvas" class="fixed inset-0 pointer-events-none z-0 opacity-40"></canvas>
+
+    <header class="fixed top-0 left-0 w-full z-50 glass-panel border-b border-palette-teal/20 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="#home" class="flex items-center space-x-3 group">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-palette-yellow via-palette-lime to-palette-green flex items-center justify-center font-heading font-extrabold text-xl text-black shadow-lg shadow-palette-green/20 group-hover:scale-105 transition-transform">
+                        L37
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-heading font-bold text-xl tracking-wider text-white group-hover:text-palette-yellow transition-colors">LEARN<span class="text-palette-yellow">37</span></span>
+                        <span class="text-[10px] tracking-widest text-palette-lime uppercase font-mono">Cybersecurity & AGM</span>
+                    </div>
+                </a>
+
+                <nav class="hidden lg:flex items-center space-x-8 text-sm font-medium">
+                    <a href="#about" class="text-gray-300 hover:text-palette-yellow transition-colors">About</a>
+                    <a href="#programme" class="text-gray-300 hover:text-palette-yellow transition-colors">Programme</a>
+                    <a href="#working-groups" class="text-gray-300 hover:text-palette-yellow transition-colors">Working Groups</a>
+                    <a href="#speakers" class="text-gray-300 hover:text-palette-yellow transition-colors">Speakers</a>
+                    <a href="#sponsors" class="text-gray-300 hover:text-palette-yellow transition-colors">Sponsors</a>
+                    <a href="#contact" class="text-gray-300 hover:text-palette-yellow transition-colors">Event Info</a>
+                </nav>
+
+                <div class="hidden sm:flex items-center space-x-4">
+                    <button onclick="openModal('registerModal')" class="px-5 py-2.5 rounded-xl btn-gradient font-bold text-sm shadow-lg shadow-palette-green/20 hover:brightness-110 active:scale-95 transition-all">
+                        Register Now
+                    </button>
+                </div>
+
+                <button id="mobileMenuBtn" class="lg:hidden p-2 rounded-lg text-gray-300 hover:text-white hover:bg-palette-slate/50 focus:outline-none">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobileDrawer" class="hidden lg:hidden glass-panel border-t border-palette-teal/20 px-4 pt-3 pb-6 space-y-3">
+            <a href="#about" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-200 hover:bg-palette-teal/20 hover:text-palette-yellow">About</a>
+            <a href="#programme" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-200 hover:bg-palette-teal/20 hover:text-palette-yellow">Programme</a>
+            <a href="#working-groups" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-200 hover:bg-palette-teal/20 hover:text-palette-yellow">Working Groups</a>
+            <a href="#speakers" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-200 hover:bg-palette-teal/20 hover:text-palette-yellow">Speakers</a>
+            <a href="#sponsors" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-200 hover:bg-palette-teal/20 hover:text-palette-yellow">Sponsors</a>
+            <a href="#contact" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-200 hover:bg-palette-teal/20 hover:text-palette-yellow">Event Info</a>
+            <div class="pt-2">
+                <button onclick="openModal('registerModal')" class="w-full py-2.5 rounded-xl btn-gradient font-bold text-center">
+                    Register Now
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="relative z-10 pt-20">
+
+        <section id="home" class="relative min-h-[92vh] flex items-center justify-center py-20 cyber-grid overflow-hidden">
+            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-palette-green/20 rounded-full blur-[130px] pointer-events-none"></div>
+            <div class="absolute bottom-10 right-10 w-80 h-80 bg-palette-deepTeal/40 rounded-full blur-[100px] pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border border-palette-lime/40 text-palette-yellow text-xs sm:text-sm font-semibold tracking-wide mb-8 animate-float">
+                    <span class="w-2.5 h-2.5 rounded-full bg-palette-lime animate-ping"></span>
+                    <span>29 October 2026 &bull; Annual General Meeting & Cybersecurity Programme</span>
+                </div>
+
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white mb-6 leading-tight">
+                    Strengthening Cybersecurity in <br class="hidden sm:block"/>
+                    <span class="text-gradient">Education & Research</span>
+                </h1>
+
+                <p class="max-w-3xl mx-auto text-base sm:text-xl text-gray-300 font-light mb-10 leading-relaxed">
+                    Bringing Sri Lanka's education and research community together to strengthen cybersecurity, collaboration, and digital innovation.
+                </p>
+
+                <div class="flex flex-wrap items-center justify-center gap-4 mb-16">
+                    <button onclick="openModal('registerModal')" class="px-8 py-4 rounded-xl btn-gradient font-bold text-base shadow-xl shadow-palette-green/20 hover:scale-105 active:scale-95 transition-all flex items-center gap-2">
+                        <i data-lucide="user-plus" class="w-5 h-5"></i>
+                        Register Now
+                    </button>
+                    <a href="#programme" class="px-8 py-4 rounded-xl glass-panel text-white font-semibold text-base hover:border-palette-lime hover:bg-palette-teal/20 transition-all flex items-center gap-2">
+                        <i data-lucide="calendar" class="w-5 h-5 text-palette-lime"></i>
+                        View Programme
+                    </a>
+                    <button onclick="openModal('sponsorModal')" class="px-8 py-4 rounded-xl border border-palette-yellow/40 text-palette-yellow hover:bg-palette-yellow/10 font-semibold text-base transition-all flex items-center gap-2">
+                        <i data-lucide="award" class="w-5 h-5"></i>
+                        Become a Sponsor
+                    </button>
+                </div>
+
+                <!-- Countdown Timer Card -->
+                <div class="max-w-3xl mx-auto glass-panel p-6 sm:p-8 rounded-2xl border border-palette-teal/40 shadow-2xl">
+                    <div class="text-xs uppercase tracking-widest text-palette-lime font-mono mb-4 font-semibold">Event Countdown</div>
+                    <div class="grid grid-cols-4 gap-3 sm:gap-6 text-center" id="countdown">
+                        <div class="p-3 sm:p-4 rounded-xl bg-palette-darkBg/90 border border-palette-teal/30">
+                            <span id="days" class="text-2xl sm:text-4xl font-extrabold text-white">00</span>
+                            <span class="block text-[10px] sm:text-xs text-gray-400 mt-1 uppercase font-medium">Days</span>
+                        </div>
+                        <div class="p-3 sm:p-4 rounded-xl bg-palette-darkBg/90 border border-palette-teal/30">
+                            <span id="hours" class="text-2xl sm:text-4xl font-extrabold text-white">00</span>
+                            <span class="block text-[10px] sm:text-xs text-gray-400 mt-1 uppercase font-medium">Hours</span>
+                        </div>
+                        <div class="p-3 sm:p-4 rounded-xl bg-palette-darkBg/90 border border-palette-teal/30">
+                            <span id="minutes" class="text-2xl sm:text-4xl font-extrabold text-white">00</span>
+                            <span class="block text-[10px] sm:text-xs text-gray-400 mt-1 uppercase font-medium">Mins</span>
+                        </div>
+                        <div class="p-3 sm:p-4 rounded-xl bg-palette-darkBg/90 border border-palette-teal/30">
+                            <span id="seconds" class="text-2xl sm:text-4xl font-extrabold text-palette-yellow">00</span>
+                            <span class="block text-[10px] sm:text-xs text-gray-400 mt-1 uppercase font-medium">Secs</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="py-24 relative z-10 border-t border-palette-teal/20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    <div class="lg:col-span-6 space-y-6">
+                        <div class="inline-flex items-center gap-2 text-palette-lime text-sm font-semibold uppercase tracking-widest">
+                            <i data-lucide="shield-check" class="w-4 h-4"></i> About LEARN37
+                        </div>
+                        <h2 class="text-3xl sm:text-5xl font-bold text-white leading-tight">
+                            Connecting Sri Lanka's <span class="text-gradient">Higher Education & Research</span>
+                        </h2>
+                        <p class="text-gray-300 leading-relaxed text-base sm:text-lg">
+                            LEARN37 is part of the <strong class="text-white">Lanka Education And Research Network (LEARN)</strong>, bringing together representatives from Sri Lanka's education, research, and technology communities.
+                        </p>
+                        <p class="text-gray-400 leading-relaxed text-sm sm:text-base">
+                            This year's programme will place a special focus on cybersecurity in education and research, providing a platform to discuss emerging cyber threats, institutional preparedness, incident response, practical solutions, and collaboration. It also includes the official **LEARN Annual General Meeting (AGM)**.
+                        </p>
+
+                        <div class="grid grid-cols-3 gap-4 pt-4">
+                            <div class="p-4 rounded-xl glass-panel text-center">
+                                <div class="text-2xl font-extrabold text-palette-yellow">30+</div>
+                                <div class="text-xs text-gray-400 mt-1">Institutions</div>
+                            </div>
+                            <div class="p-4 rounded-xl glass-panel text-center">
+                                <div class="text-2xl font-extrabold text-palette-lime">200+</div>
+                                <div class="text-xs text-gray-400 mt-1">Delegates</div>
+                            </div>
+                            <div class="p-4 rounded-xl glass-panel text-center">
+                                <div class="text-2xl font-extrabold text-palette-green">1 Day</div>
+                                <div class="text-xs text-gray-400 mt-1">Parallel AGM Track</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="p-6 rounded-2xl glass-panel glass-panel-interactive border-l-4 border-l-palette-yellow">
+                            <div class="w-12 h-12 rounded-xl bg-palette-yellow/10 flex items-center justify-center text-palette-yellow mb-4">
+                                <i data-lucide="lock" class="w-6 h-6"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">Cybersecurity</h3>
+                            <p class="text-sm text-gray-400">Emerging threats, preparedness and practical cybersecurity strategies.</p>
+                        </div>
+
+                        <div class="p-6 rounded-2xl glass-panel glass-panel-interactive border-l-4 border-l-palette-lime">
+                            <div class="w-12 h-12 rounded-xl bg-palette-lime/10 flex items-center justify-center text-palette-lime mb-4">
+                                <i data-lucide="users" class="w-6 h-6"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">LEARN AGM</h3>
+                            <p class="text-sm text-gray-400">Annual General Meeting for official representatives of LEARN member institutions.</p>
+                        </div>
+
+                        <div class="p-6 rounded-2xl glass-panel glass-panel-interactive border-l-4 border-l-palette-green sm:col-span-2">
+                            <div class="w-12 h-12 rounded-xl bg-palette-green/10 flex items-center justify-center text-palette-green mb-4">
+                                <i data-lucide="share-2" class="w-6 h-6"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">Knowledge Exchange</h3>
+                            <p class="text-sm text-gray-400">Expert presentations, industry perspectives, and interactive panel discussions.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Theme Pillars Grid -->
+                <div class="mt-20">
+                    <div class="text-center mb-12">
+                        <h3 class="text-2xl sm:text-3xl font-bold text-white">Main Theme: Strengthening Cybersecurity</h3>
+                        <p class="text-gray-400 text-sm mt-2">Core pillars addressing threat landscapes in education and research</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="p-6 rounded-2xl glass-panel text-center group hover:border-palette-yellow transition-all">
+                            <div class="w-14 h-14 mx-auto rounded-full bg-palette-yellow/10 flex items-center justify-center text-palette-yellow mb-4 group-hover:scale-110 transition-transform">
+                                <i data-lucide="alert-triangle" class="w-7 h-7"></i>
+                            </div>
+                            <h4 class="font-bold text-white text-lg mb-2">Emerging Threats</h4>
+                            <p class="text-xs text-gray-400">Understanding emerging cyber threats affecting higher education and research infrastructure.</p>
+                        </div>
+
+                        <div class="p-6 rounded-2xl glass-panel text-center group hover:border-palette-lime transition-all">
+                            <div class="w-14 h-14 mx-auto rounded-full bg-palette-lime/10 flex items-center justify-center text-palette-lime mb-4 group-hover:scale-110 transition-transform">
+                                <i data-lucide="shield-check" class="w-7 h-7"></i>
+                            </div>
+                            <h4 class="font-bold text-white text-lg mb-2">Institutional Preparedness</h4>
+                            <p class="text-xs text-gray-400">Establishing robust defense policies, zero-trust models, and campus security postures.</p>
+                        </div>
+
+                        <div class="p-6 rounded-2xl glass-panel text-center group hover:border-palette-green transition-all">
+                            <div class="w-14 h-14 mx-auto rounded-full bg-palette-green/10 flex items-center justify-center text-palette-green mb-4 group-hover:scale-110 transition-transform">
+                                <i data-lucide="siren" class="w-7 h-7"></i>
+                            </div>
+                            <h4 class="font-bold text-white text-lg mb-2">Incident Response</h4>
+                            <p class="text-xs text-gray-400">Practical containment strategies, mitigation frameworks, and disaster recovery execution.</p>
+                        </div>
+
+                        <div class="p-6 rounded-2xl glass-panel text-center group hover:border-palette-teal transition-all">
+                            <div class="w-14 h-14 mx-auto rounded-full bg-palette-teal/10 flex items-center justify-center text-palette-teal mb-4 group-hover:scale-110 transition-transform">
+                                <i data-lucide="network" class="w-7 h-7"></i>
+                            </div>
+                            <h4 class="font-bold text-white text-lg mb-2">Collaboration</h4>
+                            <p class="text-xs text-gray-400">Nationwide threat-sharing networks and inter-university research defense alliances.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="programme" class="py-24 relative border-t border-palette-teal/20 bg-palette-slate/20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <span class="text-palette-lime text-sm font-semibold uppercase tracking-widest">Programme Agenda</span>
+                    <h2 class="text-3xl sm:text-5xl font-extrabold text-white mt-2">One-Day Programme Schedule</h2>
+                    <p class="text-gray-400 mt-4 text-sm sm:text-base">Proposed schedule featuring the parallel LEARN AGM session and Working Groups.</p>
+                </div>
+
+                <!-- Track Filter Tabs -->
+                <div class="flex justify-center gap-2 mb-10 flex-wrap">
+                    <button onclick="filterAgenda('all')" id="tab-all" class="px-5 py-2.5 rounded-xl font-semibold text-xs sm:text-sm bg-palette-yellow text-black shadow-lg transition-all">
+                        All Sessions
+                    </button>
+                    <button onclick="filterAgenda('main')" id="tab-main" class="px-5 py-2.5 rounded-xl font-semibold text-xs sm:text-sm glass-panel text-gray-300 hover:text-white transition-all">
+                        Main Programme
+                    </button>
+                    <button onclick="filterAgenda('agm')" id="tab-agm" class="px-5 py-2.5 rounded-xl font-semibold text-xs sm:text-sm glass-panel text-gray-300 hover:text-white transition-all">
+                        LEARN AGM Track
+                    </button>
+                    <button onclick="filterAgenda('wg')" id="tab-wg" class="px-5 py-2.5 rounded-xl font-semibold text-xs sm:text-sm glass-panel text-gray-300 hover:text-white transition-all">
+                        Working Groups (Agri/AI)
+                    </button>
+                </div>
+
+                <!-- Schedule List -->
+                <div class="glass-panel rounded-2xl overflow-hidden border border-palette-teal/30 shadow-2xl divide-y divide-palette-teal/20">
+                    
+                    <div class="agenda-item main p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 hover:bg-palette-teal/10 transition-colors">
+                        <div class="px-3.5 py-1.5 rounded-xl bg-palette-yellow/20 text-palette-yellow font-mono text-xs font-bold shrink-0">
+                            8:30 - 9:00
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="text-xl font-bold text-white">Registration</h4>
+                            <p class="text-sm text-gray-400 mt-1">Arrival, badge pick-up, and networking breakfast.</p>
+                        </div>
+                        <span class="px-3 py-1 rounded-full text-xs font-medium bg-gray-800 text-gray-300">General</span>
+                    </div>
+
+                    <div class="agenda-item main p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 hover:bg-palette-teal/10 transition-colors">
+                        <div class="px-3.5 py-1.5 rounded-xl bg-palette-yellow/20 text-palette-yellow font-mono text-xs font-bold shrink-0">
+                            9:00 - 9:20
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="text-xl font-bold text-white">Opening Ceremony - Welcome & Introduction</h4>
+                            <p class="text-sm text-gray-400 mt-1">Opening remarks and event briefing for LEARN37 delegates.</p>
+                        </div>
+                        <span class="px-3 py-1 rounded-full text-xs font-medium bg-palette-green/20 text-palette-lime">Main Stage</span>
+                    </div>
+
+                    <div class="agenda-item main p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 hover:bg-palette-teal/10 transition-colors">
+                        <div class="px-3.5 py-1.5 rounded-xl bg-palette-yellow/20 text-palette-yellow font-mono text-xs font-bold shrink-0">
+                            9:20 - 10:00
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="text-xl font-bold text-white">Keynote: Cybersecurity in Education & Research</h4>
+                            <p class="text-sm text-gray-400 mt-1">Strategic keynotes on cyber threats and defense in academic environments.</p>
+                        </div>
+                        <span class="px-3 py-1 rounded-full text-xs font-medium bg-palette-yellow/20 text-palette-yellow">Keynote</span>
+                    </div>
+
+                    <div class="p-4 bg-palette-slate/40 flex items-center gap-3 text-sm text-palette-lime font-semibold">
+                        <i data-lucide="coffee" class="w-4 h-4"></i>
+                        <span>10:00 - 10:15 &bull; Tea / Coffee Break</span>
+                    </div>
+
+                    <!-- Parallel Track Block -->
+                    <div class="agenda-item agm wg main p-6 sm:p-8 bg-palette-teal/10 border-l-4 border-l-palette-yellow">
+                        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-4">
+                            <div class="px-3.5 py-1.5 rounded-xl bg-palette-yellow text-black font-mono text-xs font-bold shrink-0">
+                                10:15 - 12:30
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-xl font-bold text-white">Parallel Morning Sessions</h4>
+                                <p class="text-sm text-gray-300 mt-1">Concurrent track sessions across LEARN Governance and Technology Working Groups.</p>
+                            </div>
+                            <span class="px-3 py-1 rounded-full text-xs font-medium bg-palette-lime/20 text-palette-lime">Parallel Tracks</span>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                            <div class="p-4 rounded-xl glass-panel border border-palette-yellow/30">
+                                <strong class="text-palette-yellow block mb-1">Track 1: LEARN Annual General Meeting (AGM)</strong>
+                                Official AGM for official representatives of LEARN member institutions.
+                            </div>
+                            <div class="p-4 rounded-xl glass-panel border border-palette-green/30">
+                                <strong class="text-palette-lime block mb-1">Track 2: Cybersecurity / Agri WG / AI WG</strong>
+                                Technical deliberations and working group sessions on AgriTech & GenAI.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-palette-slate/40 flex items-center gap-3 text-sm text-palette-lime font-semibold">
+                        <i data-lucide="utensils" class="w-4 h-4"></i>
+                        <span>12:30 - 1:30 &bull; Lunch & Networking</span>
+                    </div>
+
+                    <div class="agenda-item wg main p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 hover:bg-palette-teal/10 transition-colors">
+                        <div class="px-3.5 py-1.5 rounded-xl bg-palette-yellow/20 text-palette-yellow font-mono text-xs font-bold shrink-0">
+                            1:30 - 3:45
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="text-xl font-bold text-white">Cybersecurity Programme / Agri WG / AI WG</h4>
+                            <p class="text-sm text-gray-400 mt-1">Deep-dive technical sessions, threat modeling, and working group presentations.</p>
+                        </div>
+                        <span class="px-3 py-1 rounded-full text-xs font-medium bg-palette-green/20 text-palette-lime">Technical Sessions</span>
+                    </div>
+
+                    <div class="p-4 bg-palette-slate/40 flex items-center gap-3 text-sm text-palette-lime font-semibold">
+                        <i data-lucide="coffee" class="w-4 h-4"></i>
+                        <span>3:45 - 4:00 &bull; Tea / Coffee Break</span>
+                    </div>
+
+                    <div class="agenda-item main p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 hover:bg-palette-teal/10 transition-colors">
+                        <div class="px-3.5 py-1.5 rounded-xl bg-palette-yellow/20 text-palette-yellow font-mono text-xs font-bold shrink-0">
+                            4:00 - 5:00
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="text-xl font-bold text-white">Panel Discussion / Sponsor Talk & Common Closing</h4>
+                            <p class="text-sm text-gray-400 mt-1">Cross-industry panel insights, partner perspectives, and common closing remarks.</p>
+                        </div>
+                        <span class="px-3 py-1 rounded-full text-xs font-medium bg-palette-yellow text-black font-bold">Plenary Session</span>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="working-groups" class="py-24 relative border-t border-palette-teal/20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-palette-lime text-sm font-semibold uppercase tracking-widest">LEARN Initiatives</span>
+                    <h2 class="text-3xl sm:text-5xl font-extrabold text-white mt-2">Working Groups & Initiatives</h2>
+                    <p class="text-gray-400 mt-4 text-sm sm:text-base">LEARN37 highlights progress and future directions of LEARN's key technology initiatives.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- AgriTech WG -->
+                    <div class="glass-panel p-8 rounded-3xl border border-palette-green/30 relative overflow-hidden group hover:border-palette-yellow transition-all">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-palette-yellow to-palette-lime flex items-center justify-center text-black font-bold mb-6 shadow-lg">
+                            <i data-lucide="sprout" class="w-7 h-7"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-3">Agriculture Technology (AgroTech) Working Group</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-6">
+                            A platform bringing together agriculture academics, researchers, technology specialists and institutions to explore digital technologies, AI, IoT, remote sensing and data platforms in agriculture.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 rounded-full text-xs font-medium bg-palette-green/20 text-palette-lime border border-palette-green/30">IoT Sensors</span>
+                            <span class="px-3 py-1 rounded-full text-xs font-medium bg-palette-green/20 text-palette-lime border border-palette-green/30">Remote Sensing</span>
+                            <span class="px-3 py-1 rounded-full text-xs font-medium bg-palette-green/20 text-palette-lime border border-palette-green/30">Data Platforms</span>
+                        </div>
+                    </div>
+
+                    <!-- Gen AI WG -->
+                    <div class="glass-panel p-8 rounded-3xl border border-palette-teal/30 relative overflow-hidden group hover:border-palette-yellow transition-all">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-palette-lime to-palette-green flex items-center justify-center text-black font-bold mb-6 shadow-lg">
+                            <i data-lucide="cpu" class="w-7 h-7"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-3">Generative AI Working Group</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-6">
+                            A community focused on the practical and responsible use of Generative AI in education, research, student services, and institutional operations.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 rounded-full text-xs font-medium bg-palette-teal/20 text-palette-lime border border-palette-teal/30">Responsible AI</span>
+                            <span class="px-3 py-1 rounded-full text-xs font-medium bg-palette-teal/20 text-palette-lime border border-palette-teal/30">Research Automation</span>
+                            <span class="px-3 py-1 rounded-full text-xs font-medium bg-palette-teal/20 text-palette-lime border border-palette-teal/30">Student Services</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="speakers" class="py-24 bg-palette-slate/20 relative border-t border-palette-teal/20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-palette-yellow text-sm font-semibold uppercase tracking-widest">Speakers & Experts</span>
+                    <h2 class="text-3xl sm:text-5xl font-extrabold text-white mt-2">Distinguished Speakers</h2>
+                    <p class="text-gray-400 mt-4 text-sm sm:text-base">LEARN37 brings together cybersecurity experts, academics, technology professionals, and industry leaders.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Speaker 1 -->
+                    <div class="glass-panel rounded-2xl p-6 glass-panel-interactive text-center group">
+                        <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-palette-yellow to-palette-green p-1">
+                            <div class="w-full h-full rounded-full bg-palette-darkBg flex items-center justify-center text-palette-yellow">
+                                <i data-lucide="user" class="w-10 h-10"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-bold text-white group-hover:text-palette-yellow transition-colors">[Speaker Name]</h3>
+                        <p class="text-xs text-palette-lime font-medium mt-0.5">[Designation]</p>
+                        <p class="text-xs text-gray-400 mt-1">[Organisation]</p>
+                        <div class="mt-4 pt-3 border-t border-palette-teal/20 text-[11px] text-gray-300 font-mono">
+                            Topic: Keynote Address
+                        </div>
+                    </div>
+
+                    <!-- Speaker 2 -->
+                    <div class="glass-panel rounded-2xl p-6 glass-panel-interactive text-center group">
+                        <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-palette-lime to-palette-teal p-1">
+                            <div class="w-full h-full rounded-full bg-palette-darkBg flex items-center justify-center text-palette-lime">
+                                <i data-lucide="user" class="w-10 h-10"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-bold text-white group-hover:text-palette-yellow transition-colors">[Speaker Name]</h3>
+                        <p class="text-xs text-palette-lime font-medium mt-0.5">[Designation]</p>
+                        <p class="text-xs text-gray-400 mt-1">[Organisation]</p>
+                        <div class="mt-4 pt-3 border-t border-palette-teal/20 text-[11px] text-gray-300 font-mono">
+                            Topic: AgroTech Security
+                        </div>
+                    </div>
+
+                    <!-- Speaker 3 -->
+                    <div class="glass-panel rounded-2xl p-6 glass-panel-interactive text-center group">
+                        <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-palette-green to-palette-deepTeal p-1">
+                            <div class="w-full h-full rounded-full bg-palette-darkBg flex items-center justify-center text-palette-green">
+                                <i data-lucide="user" class="w-10 h-10"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-bold text-white group-hover:text-palette-yellow transition-colors">[Speaker Name]</h3>
+                        <p class="text-xs text-palette-lime font-medium mt-0.5">[Designation]</p>
+                        <p class="text-xs text-gray-400 mt-1">[Organisation]</p>
+                        <div class="mt-4 pt-3 border-t border-palette-teal/20 text-[11px] text-gray-300 font-mono">
+                            Topic: Generative AI Safety
+                        </div>
+                    </div>
+
+                    <!-- Speaker 4 -->
+                    <div class="glass-panel rounded-2xl p-6 glass-panel-interactive text-center group">
+                        <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-palette-yellow to-palette-lime p-1">
+                            <div class="w-full h-full rounded-full bg-palette-darkBg flex items-center justify-center text-palette-yellow">
+                                <i data-lucide="user" class="w-10 h-10"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-bold text-white group-hover:text-palette-yellow transition-colors">[Speaker Name]</h3>
+                        <p class="text-xs text-palette-lime font-medium mt-0.5">[Designation]</p>
+                        <p class="text-xs text-gray-400 mt-1">[Organisation]</p>
+                        <div class="mt-4 pt-3 border-t border-palette-teal/20 text-[11px] text-gray-300 font-mono">
+                            Topic: Threat Intelligence
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sponsors" class="py-24 relative border-t border-palette-teal/20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-palette-lime text-sm font-semibold uppercase tracking-widest">Sponsors & Partners</span>
+                    <h2 class="text-3xl sm:text-5xl font-extrabold text-white mt-2">Sponsorship Packages</h2>
+                    <p class="text-gray-400 mt-4 text-sm sm:text-base">An opportunity for organisations in cybersecurity, ICT, cloud, networking, and digital technologies to engage with Sri Lanka's community.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- PLATINUM -->
+                    <div class="glass-panel rounded-3xl p-6 border-2 border-palette-yellow relative flex flex-col justify-between shadow-2xl scale-105 z-10 bg-gradient-to-b from-palette-yellow/10 to-transparent">
+                        <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-palette-yellow text-black font-extrabold text-[10px] uppercase rounded-full tracking-wider">
+                            Platinum Package
+                        </div>
+                        <div>
+                            <div class="text-2xl font-extrabold text-white mt-4">LKR 1,000,000</div>
+                            <ul class="mt-6 space-y-3 text-xs text-gray-200">
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-palette-yellow shrink-0 mt-0.5"></i> Speech at main session & working groups</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-palette-yellow shrink-0 mt-0.5"></i> Exhibition / stall representation</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-palette-yellow shrink-0 mt-0.5"></i> Featured promotional video</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-palette-yellow shrink-0 mt-0.5"></i> Top-tier logo & recognition</li>
+                            </ul>
+                        </div>
+                        <button onclick="openModal('sponsorModal')" class="mt-8 w-full py-3 rounded-xl bg-palette-yellow text-black font-bold text-sm hover:brightness-110 transition-all">
+                            Become a Sponsor
+                        </button>
+                    </div>
+
+                    <!-- GOLD -->
+                    <div class="glass-panel rounded-3xl p-6 border border-palette-lime/40 flex flex-col justify-between hover:border-palette-yellow transition-all">
+                        <div>
+                            <div class="text-xs font-mono font-bold text-palette-lime uppercase">Gold Package</div>
+                            <div class="text-2xl font-extrabold text-white mt-2">LKR 600,000</div>
+                            <ul class="mt-6 space-y-3 text-xs text-gray-200">
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-palette-lime shrink-0 mt-0.5"></i> Speech at working group sessions</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-palette-lime shrink-0 mt-0.5"></i> Exhibition / stall representation</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-palette-lime shrink-0 mt-0.5"></i> Promotional video + LED wall/social</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-palette-lime shrink-0 mt-0.5"></i> Prominent logo & recognition</li>
+                            </ul>
+                        </div>
+                        <button onclick="openModal('sponsorModal')" class="mt-8 w-full py-3 rounded-xl glass-panel border border-palette-lime/40 text-palette-lime hover:bg-palette-lime/10 font-bold text-sm transition-all">
+                            Become a Sponsor
+                        </button>
+                    </div>
+
+                    <!-- SILVER -->
+                    <div class="glass-panel rounded-3xl p-6 border border-palette-green/30 flex flex-col justify-between hover:border-palette-yellow transition-all">
+                        <div>
+                            <div class="text-xs font-mono font-bold text-palette-green uppercase">Silver Package</div>
+                            <div class="text-2xl font-extrabold text-white mt-2">LKR 300,000</div>
+                            <ul class="mt-6 space-y-3 text-xs text-gray-200">
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-palette-green shrink-0 mt-0.5"></i> Speech at working group sessions</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-palette-green shrink-0 mt-0.5"></i> Promotional video feature</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-palette-green shrink-0 mt-0.5"></i> Logo placement & recognition</li>
+                            </ul>
+                        </div>
+                        <button onclick="openModal('sponsorModal')" class="mt-8 w-full py-3 rounded-xl glass-panel border border-palette-green/30 text-white hover:bg-palette-green/10 font-bold text-sm transition-all">
+                            Become a Sponsor
+                        </button>
+                    </div>
+
+                    <!-- BRONZE -->
+                    <div class="glass-panel rounded-3xl p-6 border border-palette-teal/30 flex flex-col justify-between hover:border-palette-yellow transition-all">
+                        <div>
+                            <div class="text-xs font-mono font-bold text-palette-teal uppercase">Bronze Package</div>
+                            <div class="text-2xl font-extrabold text-white mt-2">LKR 150,000</div>
+                            <ul class="mt-6 space-y-3 text-xs text-gray-200">
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-palette-teal shrink-0 mt-0.5"></i> Promotional video feature</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-palette-teal shrink-0 mt-0.5"></i> Logo placement & recognition</li>
+                            </ul>
+                        </div>
+                        <button onclick="openModal('sponsorModal')" class="mt-8 w-full py-3 rounded-xl glass-panel border border-palette-teal/30 text-white hover:bg-palette-teal/10 font-bold text-sm transition-all">
+                            Become a Sponsor
+                        </button>
+                    </div>
+                </div>
+
+                <div class="mt-12 text-center text-xs text-gray-400 glass-panel p-4 rounded-xl max-w-3xl mx-auto border border-palette-teal/30">
+                    <p><strong>Note:</strong> LEARN welcomes both financial and in-kind sponsorships. Packages are a starting point and can be fully customised to align with your organisation's objectives.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-24 bg-palette-slate/20 relative border-t border-palette-teal/20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    <div class="lg:col-span-5 space-y-6">
+                        <span class="text-palette-lime text-sm font-semibold uppercase tracking-widest">Event Information</span>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Event Details & Contact</h2>
+                        
+                        <div class="space-y-4 pt-2">
+                            <div class="flex items-start gap-4 p-4 rounded-xl glass-panel">
+                                <div class="p-3 rounded-lg bg-palette-yellow/10 text-palette-yellow">
+                                    <i data-lucide="calendar" class="w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white text-base">Date & Format</h4>
+                                    <p class="text-sm text-gray-300">30 October 2026 &bull; 8:30 AM – 5:00 PM</p>
+                                    <p class="text-xs text-gray-400">Annual General Meeting & Cybersecurity Programme</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4 p-4 rounded-xl glass-panel">
+                                <div class="p-3 rounded-lg bg-palette-lime/10 text-palette-lime">
+                                    <i data-lucide="map-pin" class="w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white text-base">Venue</h4>
+                                    <p class="text-sm text-gray-300">[Venue - To be Confirmed]</p>
+                                    <p class="text-xs text-gray-400">Sri Lanka</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4 p-4 rounded-xl glass-panel">
+                                <div class="p-3 rounded-lg bg-palette-green/10 text-palette-green">
+                                    <i data-lucide="mail" class="w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white text-base">Contact LEARN</h4>
+                                    <p class="text-sm text-gray-300">Lanka Education And Research Network</p>
+                                    <p class="text-xs text-palette-lime mt-1">[To be added]</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-7">
+                        <div class="glass-panel p-8 rounded-3xl border border-palette-teal/30 relative text-center min-h-[340px] flex flex-col justify-center items-center">
+                            <div class="w-16 h-16 rounded-2xl bg-palette-green/20 flex items-center justify-center text-palette-lime mb-4">
+                                <i data-lucide="info" class="w-8 h-8"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-2">About LEARN</h3>
+                            <p class="text-sm text-gray-300 max-w-lg mb-6 leading-relaxed">
+                                Lanka Education And Research Network is Sri Lanka's National Research and Education Network, supporting connectivity, digital services, collaboration and technology-enabled education and research.
+                            </p>
+                            <div class="flex flex-wrap justify-center gap-4">
+                                <a href="https://www.learn.ac.lk" target="_blank" class="px-6 py-2.5 rounded-xl border border-palette-lime/40 text-palette-lime hover:bg-palette-lime/10 text-sm font-semibold transition-all">
+                                    Learn More About LEARN
+                                </a>
+                                <button onclick="openModal('registerModal')" class="px-6 py-2.5 rounded-xl btn-gradient text-sm font-bold shadow-lg">
+                                    Register Now
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="glass-panel border-t border-palette-teal/20 py-12 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-palette-yellow to-palette-green flex items-center justify-center font-heading font-bold text-black text-sm">
+                        L37
+                    </div>
+                    <span class="font-heading font-bold text-lg text-white">LEARN<span class="text-palette-yellow">37</span></span>
+                </div>
+                <div class="text-xs text-gray-400 text-center">
+                    &copy; 2026 Lanka Education And Research Network (LEARN). All rights reserved.
+                </div>
+                <div class="flex items-center space-x-4 text-gray-400">
+                    <a href="#" class="p-2 rounded-lg hover:text-palette-yellow transition-colors"><i data-lucide="globe" class="w-5 h-5"></i></a>
+                    <a href="#" class="p-2 rounded-lg hover:text-palette-yellow transition-colors"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+                    <a href="#" class="p-2 rounded-lg hover:text-palette-yellow transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-md p-4">
+        <div class="glass-panel max-w-lg w-full rounded-3xl p-6 sm:p-8 border border-palette-yellow/30 relative">
+            <button onclick="closeModal('registerModal')" class="absolute top-4 right-4 text-gray-400 hover:text-white p-2">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <h3 class="text-2xl font-bold text-white mb-1">Register for LEARN37</h3>
+            <p class="text-xs text-gray-400 mb-6">Join Sri Lanka's education & research cybersecurity summit.</p>
+
+            <form onsubmit="handleFormSubmit(event, 'Registration Submitted Successfully!')" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 mb-1">Full Name</label>
+                    <input type="text" required class="w-full px-4 py-2.5 rounded-xl bg-palette-darkBg border border-palette-teal/30 text-white text-sm focus:border-palette-yellow focus:outline-none" placeholder="e.g. Dr. K. Silva">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 mb-1">Institutional Email</label>
+                    <input type="email" required class="w-full px-4 py-2.5 rounded-xl bg-palette-darkBg border border-palette-teal/30 text-white text-sm focus:border-palette-yellow focus:outline-none" placeholder="e.g. delegate@university.ac.lk">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 mb-1">Institution / Organisation</label>
+                    <input type="text" required class="w-full px-4 py-2.5 rounded-xl bg-palette-darkBg border border-palette-teal/30 text-white text-sm focus:border-palette-yellow focus:outline-none" placeholder="Member Institution Name">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 mb-1">Track Selection</label>
+                    <select class="w-full px-4 py-2.5 rounded-xl bg-palette-darkBg border border-palette-teal/30 text-white text-sm focus:border-palette-yellow focus:outline-none">
+                        <option>Cybersecurity Programme & Working Groups</option>
+                        <option>LEARN AGM Official Delegate</option>
+                    </select>
+                </div>
+                <button type="submit" class="w-full py-3 rounded-xl btn-gradient font-bold text-sm shadow-lg mt-4">
+                    Submit Registration
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Sponsor Modal -->
+    <div id="sponsorModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-md p-4">
+        <div class="glass-panel max-w-lg w-full rounded-3xl p-6 sm:p-8 border border-palette-yellow/30 relative">
+            <button onclick="closeModal('sponsorModal')" class="absolute top-4 right-4 text-gray-400 hover:text-white p-2">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <h3 class="text-2xl font-bold text-white mb-1">Become a Sponsor</h3>
+            <p class="text-xs text-gray-400 mb-6">Partner with LEARN37 to engage with the higher education community.</p>
+
+            <form onsubmit="handleFormSubmit(event, 'Sponsorship Inquiry Submitted!')" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 mb-1">Organisation Name</label>
+                    <input type="text" required class="w-full px-4 py-2.5 rounded-xl bg-palette-darkBg border border-palette-teal/30 text-white text-sm focus:border-palette-yellow focus:outline-none" placeholder="Company Name">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 mb-1">Contact Email</label>
+                    <input type="email" required class="w-full px-4 py-2.5 rounded-xl bg-palette-darkBg border border-palette-teal/30 text-white text-sm focus:border-palette-yellow focus:outline-none" placeholder="contact@company.com">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 mb-1">Preferred Package</label>
+                    <select class="w-full px-4 py-2.5 rounded-xl bg-palette-darkBg border border-palette-teal/30 text-white text-sm focus:border-palette-yellow focus:outline-none">
+                        <option>PLATINUM (LKR 1,000,000)</option>
+                        <option>GOLD (LKR 600,000)</option>
+                        <option>SILVER (LKR 300,000)</option>
+                        <option>BRONZE (LKR 150,000)</option>
+                        <option>In-Kind Custom Package</option>
+                    </select>
+                </div>
+                <button type="submit" class="w-full py-3 rounded-xl btn-gradient font-bold text-sm shadow-lg mt-4">
+                    Send Sponsorship Request
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 hidden glass-panel border border-palette-lime px-6 py-4 rounded-2xl shadow-2xl text-white text-sm flex items-center gap-3">
+        <i data-lucide="check-circle" class="w-5 h-5 text-palette-lime"></i>
+        <span id="toastMessage">Action completed!</span>
+    </div>
+
+    <script>
+        window.onload = function() {
+            lucide.createIcons();
+            initCountdown();
+            initCanvasParticles();
+        };
+
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileDrawer = document.getElementById('mobileDrawer');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileDrawer.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('#mobileDrawer a').forEach(link => {
+            link.addEventListener('click', () => mobileDrawer.classList.add('hidden'));
+        });
+
+        function openModal(id) {
+            const modal = document.getElementById(id);
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function handleFormSubmit(e, message) {
+            e.preventDefault();
+            const modal = e.target.closest('[id$="Modal"]');
+            if (modal) closeModal(modal.id);
+
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMessage').textContent = message;
+            toast.classList.remove('hidden');
+
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 4000);
+        }
+
+        /* Agenda Filter Tabs Functionality */
+        function filterAgenda(category) {
+            const items = document.querySelectorAll('.agenda-item');
+            const buttons = ['all', 'main', 'agm', 'wg'];
+
+            buttons.forEach(btn => {
+                const el = document.getElementById('tab-' + btn);
+                if (btn === category) {
+                    el.className = 'px-5 py-2.5 rounded-xl font-semibold text-xs sm:text-sm bg-palette-yellow text-black shadow-lg transition-all';
+                } else {
+                    el.className = 'px-5 py-2.5 rounded-xl font-semibold text-xs sm:text-sm glass-panel text-gray-300 hover:text-white transition-all';
+                }
+            });
+
+            items.forEach(item => {
+                if (category === 'all' || item.classList.contains(category)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        /* Countdown to October 29, 2026 */
+        function initCountdown() {
+            const eventDate = new Date('October 29, 2026 08:30:00').getTime();
+
+            function updateTimer() {
+                const now = new Date().getTime();
+                const diff = eventDate - now;
+
+                if (diff <= 0) {
+                    document.getElementById('days').innerText = '00';
+                    document.getElementById('hours').innerText = '00';
+                    document.getElementById('minutes').innerText = '00';
+                    document.getElementById('seconds').innerText = '00';
+                    return;
+                }
+
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+                document.getElementById('days').innerText = days < 10 ? '0' + days : days;
+                document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
+                document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
+                document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
+            }
+
+            updateTimer();
+            setInterval(updateTimer, 1000);
+        }
+
+        /* Particle Canvas background animation with new color scheme */
+        function initCanvasParticles() {
+            const canvas = document.getElementById('particleCanvas');
+            const ctx = canvas.getContext('2d');
+
+            function resize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            resize();
+            window.addEventListener('resize', resize);
+
+            const particles = [];
+            const particleCount = Math.min(Math.floor(window.innerWidth / 25), 45);
+            const colors = ['#F5C006', '#90B933', '#2FA460', '#00877A'];
+
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: Math.random() * 2 + 1,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    vx: (Math.random() - 0.5) * 0.4,
+                    vy: (Math.random() - 0.5) * 0.4,
+                    alpha: Math.random() * 0.4 + 0.2
+                });
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                for (let i = 0; i < particles.length; i++) {
+                    const p = particles[i];
+                    p.x += p.vx;
+                    p.y += p.vy;
+
+                    if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                    if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = p.color;
+                    ctx.globalAlpha = p.alpha;
+                    ctx.fill();
+
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const p2 = particles[j];
+                        const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+                        if (dist < 110) {
+                            ctx.beginPath();
+                            ctx.moveTo(p.x, p.y);
+                            ctx.lineTo(p2.x, p2.y);
+                            ctx.strokeStyle = '#2FA460';
+                            ctx.globalAlpha = (1 - dist / 110) * 0.12;
+                            ctx.stroke();
+                        }
+                    }
+                }
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
+    </script>
+</body>
+</html>
